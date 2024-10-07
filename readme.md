@@ -1,10 +1,8 @@
-Here is the updated README.md that reflects the true status of your project, including debugging notes and information about running tests:
-
-RESTful API with Express.js and MongoDB
+## RESTful API with Express.js and MongoDB
 
 This project is a RESTful API built using Express.js and MongoDB. It allows users to perform CRUD operations on a collection of contacts, supporting features like pagination, filtering, and sorting.
 
-Table of Contents
+## Table of Contents
 
 	1.	Project Overview
 	2.	Technologies
@@ -17,7 +15,7 @@ Table of Contents
 	9.	Testing with Jest and MongoDB
 	10.	Issues and Troubleshooting
 
-Project Overview
+## Project Overview
 
 The project implements a REST API for managing contacts, allowing users to:
 
@@ -26,20 +24,20 @@ The project implements a REST API for managing contacts, allowing users to:
 	•	Update existing contacts.
 	•	Delete a contact by its ID.
 
-Features:
+## Features:
 
 	•	Pagination: Control the number of results per page.
 	•	Filtering: Filter contacts by field values such as first name, last name, etc.
 	•	Sorting: Sort contacts by any field in ascending or descending order.
 
-Technologies
+## Technologies
 
 	•	Node.js with Express.js
 	•	MongoDB with Mongoose
 	•	Docker for containerization
 	•	Jest for testing
 
-Requirements
+## Requirements
 
 To run this project, ensure that you have the following tools installed:
 
@@ -47,7 +45,7 @@ To run this project, ensure that you have the following tools installed:
 	•	Docker (optional, for containerization)
 	•	npm (for dependency management)
 
-Installation
+## ## Installation
 
 	1.	Clone the repository:
 
@@ -63,7 +61,7 @@ npm install
 	3.	Set up the MongoDB database:
 	•	Make sure MongoDB is running on your local machine, or you can use Docker to run MongoDB (instructions in the Docker section below).
 
-Running the Project
+## Running the Project
 
 	1.	Start the server:
 
@@ -78,7 +76,7 @@ MONGODB_URI=mongodb://localhost:27017/contactsdb
 
 
 
-API Endpoints
+## API Endpoints
 
 	1.	Get All Contacts
 GET /v1/contacts
@@ -107,7 +105,7 @@ POST /v1/contacts
 }
 
 
-Example Request:
+## Example Request:
 
 curl -X POST http://localhost:8080/v1/contacts \
 -H 'Content-Type: application/json' \
@@ -123,7 +121,7 @@ curl -X DELETE http://localhost:8080/v1/contacts/CONTACT_ID
 
 
 
-Filtering, Sorting, and Pagination
+## Filtering, Sorting, and Pagination
 
 	•	Filtering:
 	•	Use the following headers to filter:
@@ -139,7 +137,7 @@ Filtering, Sorting, and Pagination
 	•	page: The page number.
 	•	size: Number of contacts per page.
 
-Running with Docker
+## Running with Docker
 
 	1.	Build and Run Docker Containers:
 
@@ -156,14 +154,14 @@ docker logs restfulroutesusingexpressjs-mongo-1
 	4.	Test the API:
 You can test the API using curl or any API client like Postman.
 
-Docker Compose Setup
+## Docker Compose Setup
 
 The docker-compose.yml file contains two services:
 
 	•	app: Runs the Express.js API server.
 	•	mongo: Runs the MongoDB database.
 
-Testing with Jest and MongoDB
+## Testing with Jest and MongoDB
 
 This project includes automated tests using Jest. It also uses MongoDB to handle test data.
 
@@ -171,7 +169,7 @@ This project includes automated tests using Jest. It also uses MongoDB to handle
 
 npx jest
 
-If you are facing issues with open handles after tests complete, run Jest with the --detectOpenHandles flag:
+## If you are facing issues with open handles after tests complete, run Jest with the --detectOpenHandles flag:
 
 npx jest --detectOpenHandles
 
@@ -182,9 +180,9 @@ npx jest --detectOpenHandles
 	3.	Closing MongoDB Connection and Server:
 	•	Jest might throw errors if the MongoDB connection or server isn’t closed properly. This project ensures both are closed using the afterAll() function in the test file.
 
-Issues and Troubleshooting
+## Issues and Troubleshooting
 
-Throughout the development and testing of this RESTful API, I encountered several technical challenges. Below is a comprehensive summary of the key issues I faced, as well as the steps I took to resolve them. This should serve as a guide for debugging similar issues in future projects.
+### Throughout the development and testing of this RESTful API, I encountered several technical challenges. Below is a comprehensive summary of the key issues I faced, as well as the steps I took to resolve them. This should serve as a guide for debugging similar issues in future projects.
 
 1. Issue: Test Package Not Executing with Jest Command
 

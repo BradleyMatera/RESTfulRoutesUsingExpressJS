@@ -1,0 +1,15 @@
+{
+  "name": "restful-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^6.9.0",
+    "dotenv": "^16.0.3",
+    "@jworkman-fs/asl": "^1.0.0"
+  }
+}

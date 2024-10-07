@@ -1,18 +1,17 @@
-# Use an official Node.js image
-FROM node:16
+# Use the node:18-alpine image as base
+FROM node:18-alpine
 
-# Set working directory
-WORKDIR /usr/src/app
+# Set the working directory in the container
+WORKDIR /app
 
-# Copy package.json and install dependencies
-COPY package*.json ./
-RUN npm install
-
-# Copy the rest of the application files
+# Copy the current directory contents into the container
 COPY . .
 
-# Expose port
-EXPOSE 8080
+# Install Python, make, g++, and curl development headers
+RUN apk add --no-cache python3 make g++ curl curl-dev
 
-# Start the app
-CMD ["npm", "start"]
+# Install the package globally
+RUN npm install -g @jworkman-fs/wdv-cli
+
+# Default command to run in the container
+CMD ["sh"]

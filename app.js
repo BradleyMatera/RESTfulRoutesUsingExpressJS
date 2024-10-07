@@ -9,7 +9,6 @@ const port = process.env.PORT || 8080;
 app.use(express.json());
 
 // Connect to MongoDB
-// MongoDB connection
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -21,5 +20,10 @@ mongoose.connect(process.env.MONGODB_URI, {
 const contactsRouter = require('./routes/contacts');
 app.use('/v1/contacts', contactsRouter); // Make sure this path is correct
 
-// Export app for testing
-module.exports = app;
+// Start the server and listen on the correct port
+const server = app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
+
+// Export app and server for testing
+module.exports = { app, server };

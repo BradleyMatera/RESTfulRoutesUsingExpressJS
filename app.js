@@ -9,20 +9,17 @@ const port = process.env.PORT || 8080;
 app.use(express.json());
 
 // Connect to MongoDB
-mongoose.connect(process.env.DATABASE_URL, {
+// MongoDB connection
+mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-});
-
-const db = mongoose.connection;
-db.on('error', (error) => console.error('MongoDB connection error:', error));
-db.once('open', () => console.log('Connected to MongoDB'));
+})
+  .then(() => console.log('Connected to MongoDB'))
+  .catch(err => console.log('MongoDB connection error:', err));
 
 // Routes
 const contactsRouter = require('./routes/contacts');
-app.use('/v1/contacts', contactsRouter);
+app.use('/v1/contacts', contactsRouter); // Make sure this path is correct
 
-// Start the server
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+// Export app for testing
+module.exports = app;

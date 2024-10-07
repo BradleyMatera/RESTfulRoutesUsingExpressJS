@@ -193,3 +193,7 @@ Issues and Troubleshooting
 If MongoDB is not running, ensure that the service is up, or run it in Docker.
 	2.	Internal Server Error:
 If you receive an “Internal Server Error” response, check the logs for any issues with MongoDB queries or invalid inputs.
+
+
+TESTING WITH JEST and MONGODB
+

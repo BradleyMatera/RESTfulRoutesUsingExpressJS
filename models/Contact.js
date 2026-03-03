@@ -8,4 +8,14 @@ const contactSchema = new mongoose.Schema({
   birthday: { type: Date, required: true }
 });
 
+// Transform serialized output: expose `id` (string), hide `_id` and `__v`.
+// See https://mongoosejs.com/docs/guide.html#toJSON
+contactSchema.set('toJSON', {
+  virtuals: true,
+  transform: (_doc, ret) => {
+    delete ret._id;
+    delete ret.__v;
+  },
+});
+
 module.exports = mongoose.model('Contact', contactSchema);

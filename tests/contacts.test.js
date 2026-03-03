@@ -15,14 +15,21 @@ describe('Contacts API', () => {
         const newContact = {
             fname: 'John',
             lname: 'Doe',
-            phone: '123456789',
+            phone: '1234567890',
             email: 'johndoe@example.com',
             birthday: '1990-01-01'
         };
         const res = await request(app).post('/v1/contacts').send(newContact);
         expect(res.statusCode).toEqual(201);
-        expect(res.body).toHaveProperty('_id');
-        contactId = res.body._id;  // Save the contact ID for other tests
+        expect(res.body).toHaveProperty('id');
+        contactId = res.body.id;  // Save the contact ID for other tests
+    });
+
+    it('should return 400 when required fields are missing on POST', async () => {
+        const res = await request(app).post('/v1/contacts').send({ fname: 'Only' });
+        expect(res.statusCode).toEqual(400);
+        expect(res.body).toHaveProperty('errors');
+        expect(Array.isArray(res.body.errors)).toBe(true);
     });
 
     it('should get all contacts', async () => {
@@ -34,20 +41,32 @@ describe('Contacts API', () => {
     it('should get a contact by ID', async () => {
         const res = await request(app).get(`/v1/contacts/${contactId}`);
         expect(res.statusCode).toEqual(200);
-        expect(res.body).toHaveProperty('_id', contactId);
+        expect(res.body).toHaveProperty('id', contactId);
+    });
+
+    it('should return 404 for a non-existent contact ID', async () => {
+        const fakeId = new mongoose.Types.ObjectId().toString();
+        const res = await request(app).get(`/v1/contacts/${fakeId}`);
+        expect(res.statusCode).toEqual(404);
     });
 
     it('should update a contact', async () => {
         const updatedContact = {
             fname: 'Jane',
             lname: 'Doe',
-            phone: '987654321',
+            phone: '9876543210',
             email: 'janedoe@example.com',
             birthday: '1992-02-02'
         };
         const res = await request(app).put(`/v1/contacts/${contactId}`).send(updatedContact);
         expect(res.statusCode).toEqual(200);
         expect(res.body).toHaveProperty('fname', 'Jane');
+    });
+
+    it('should return 400 when required fields are missing on PUT', async () => {
+        const res = await request(app).put(`/v1/contacts/${contactId}`).send({ fname: 'Only' });
+        expect(res.statusCode).toEqual(400);
+        expect(res.body).toHaveProperty('errors');
     });
 
     it('should delete a contact', async () => {
